@@ -5,12 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Shared\QuoteApproval\StatusCalculator;
+namespace Spryker\Shared\QuoteApproval\QuoteStatus;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\QuoteApproval\QuoteApprovalConfig;
 
-class QuoteApprovalStatusCalculator implements QuoteApprovalStatusCalculatorInterface
+class QuoteStatusCalculator implements QuoteStatusCalculatorInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -21,16 +21,16 @@ class QuoteApprovalStatusCalculator implements QuoteApprovalStatusCalculatorInte
     {
         $status = null;
 
-        foreach ($quoteTransfer->getApprovals() as $approval) {
-            if ($approval->getStatus() === QuoteApprovalConfig::STATUS_APPROVED) {
+        foreach ($quoteTransfer->getApprovals() as $quoteApprovalTransfer) {
+            if ($quoteApprovalTransfer->getStatus() === QuoteApprovalConfig::STATUS_APPROVED) {
                 return QuoteApprovalConfig::STATUS_APPROVED;
             }
 
-            if ($approval->getStatus() === QuoteApprovalConfig::STATUS_WAITING) {
+            if ($quoteApprovalTransfer->getStatus() === QuoteApprovalConfig::STATUS_WAITING) {
                 $status = QuoteApprovalConfig::STATUS_WAITING;
             }
 
-            if ($status === null && $approval->getStatus() === QuoteApprovalConfig::STATUS_DECLINED) {
+            if ($status === null && $quoteApprovalTransfer->getStatus() === QuoteApprovalConfig::STATUS_DECLINED) {
                 $status = QuoteApprovalConfig::STATUS_DECLINED;
             }
         }
