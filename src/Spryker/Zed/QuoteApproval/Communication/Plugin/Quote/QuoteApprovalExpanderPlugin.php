@@ -5,22 +5,22 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\QuoteApproval\Communication\Plugin;
+namespace Spryker\Zed\QuoteApproval\Communication\Plugin\Quote;
 
 use ArrayObject;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\Quote\Communication\Plugin\QuoteHydrationPluginInterface;
+use Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteExpanderPluginInterface;
 
 /**
  * @method \Spryker\Zed\QuoteApproval\Business\QuoteApprovalFacadeInterface getFacade()
  * @method \Spryker\Zed\QuoteApproval\QuoteApprovalConfig getConfig()
  */
-class QuoteApprovalHydrationPlugin extends AbstractPlugin implements QuoteHydrationPluginInterface
+class QuoteApprovalExpanderPlugin extends AbstractPlugin implements QuoteExpanderPluginInterface
 {
     /**
      * {@inheritdoc}
-     * - Hydrates quote approvals.
+     * - Expads quote with approvals.
      *
      * @api
      *
@@ -28,7 +28,7 @@ class QuoteApprovalHydrationPlugin extends AbstractPlugin implements QuoteHydrat
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function hydrate(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function expand(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $quoteTransfer->setApprovals(
             new ArrayObject($this->getFacade()->getQuoteApprovalsByIdQuote($quoteTransfer->getIdQuote()))

@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Shared\QuoteApproval\StatusCalculator;
+namespace Spryker\Shared\QuoteApproval\QuoteStatus;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface QuoteApprovalStatusCalculatorInterface
+interface QuoteStatusCalculatorInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

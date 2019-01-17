@@ -5,18 +5,20 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\QuoteApproval\Business\QuoteApproversProvider;
+namespace Spryker\Zed\QuoteApproval\Business\QuoteApproval;
 
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\QuoteApproval\Plugin\Permission\ApproveQuotePermissionPlugin;
+use Spryker\Zed\Kernel\PermissionAwareTrait;
 use Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyRoleFacadeInterface;
 use Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyUserFacadeInterface;
-use Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToPermissionFacadeInterface;
 
-class PotentialQuoteApproversListProvider implements PotentialQuoteApproversListProviderInterface
+class QuoteApproverListProvider implements QuoteApproverListProviderInterface
 {
+    use PermissionAwareTrait;
+
     /**
      * @var \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyRoleFacadeInterface
      */
@@ -28,23 +30,15 @@ class PotentialQuoteApproversListProvider implements PotentialQuoteApproversList
     protected $companyUserFacade;
 
     /**
-     * @var \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
-
-    /**
      * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyRoleFacadeInterface $companyRoleFacade
      * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyUserFacadeInterface $companyUserFacade
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToPermissionFacadeInterface $permissionFacade
      */
     public function __construct(
         QuoteApprovalToCompanyRoleFacadeInterface $companyRoleFacade,
-        QuoteApprovalToCompanyUserFacadeInterface $companyUserFacade,
-        QuoteApprovalToPermissionFacadeInterface $permissionFacade
+        QuoteApprovalToCompanyUserFacadeInterface $companyUserFacade
     ) {
         $this->companyRoleFacade = $companyRoleFacade;
         $this->companyUserFacade = $companyUserFacade;
-        $this->permissionFacade = $permissionFacade;
     }
 
     /**
@@ -54,7 +48,7 @@ class PotentialQuoteApproversListProvider implements PotentialQuoteApproversList
      */
     public function getApproversList(QuoteTransfer $quoteTransfer): CompanyUserCollectionTransfer
     {
-        $approverIds = $this->getPotentialApproversIds();
+        $approverIds = $this->getApproversIds();
         $quoteTransfer->requireCustomer();
 
         $customer = $quoteTransfer->getCustomer();
@@ -63,14 +57,14 @@ class PotentialQuoteApproversListProvider implements PotentialQuoteApproversList
         $companyUser = $customer->getCompanyUserTransfer();
         $idBusinessUnit = $companyUser->getFkCompanyBusinessUnit();
 
-        $potentialApproversList = $this->getCompanyUserCollectionByIds($approverIds);
-        $potentialApproversList = $this->filterByBusinessUnit($potentialApproversList, $idBusinessUnit);
-        $potentialApproversList = $this->filterCompanyUsersWhichCantApproveQuote(
-            $potentialApproversList,
+        $quoteApproverList = $this->getCompanyUserCollectionByIds($approverIds);
+        $quoteApproverList = $this->filterByBusinessUnit($quoteApproverList, $idBusinessUnit);
+        $quoteApproverList = $this->filterCompanyUsersWhichCantApproveQuote(
+            $quoteApproverList,
             $quoteTransfer
         );
 
-        return $potentialApproversList;
+        return $quoteApproverList;
     }
 
     /**
@@ -120,7 +114,7 @@ class PotentialQuoteApproversListProvider implements PotentialQuoteApproversList
         QuoteTransfer $quoteTransfer
     ): CompanyUserCollectionTransfer {
         foreach ($companyUserCollectionTransfer->getCompanyUsers() as $key => $companyUser) {
-            if (!$this->permissionFacade->can(ApproveQuotePermissionPlugin::KEY, $companyUser->getIdCompanyUser(), $quoteTransfer)) {
+            if (!$this->can(ApproveQuotePermissionPlugin::KEY, $companyUser->getIdCompanyUser(), $quoteTransfer)) {
                 $companyUserCollectionTransfer->getCompanyUsers()->offsetUnset($key);
             }
         }
@@ -131,7 +125,7 @@ class PotentialQuoteApproversListProvider implements PotentialQuoteApproversList
     /**
      * @return int[]
      */
-    protected function getPotentialApproversIds(): array
+    protected function getApproversIds(): array
     {
         return $this->companyRoleFacade->findCompanyUserIdsByPermissionKey(ApproveQuotePermissionPlugin::KEY);
     }

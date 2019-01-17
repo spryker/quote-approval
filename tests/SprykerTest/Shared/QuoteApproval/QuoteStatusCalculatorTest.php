@@ -12,18 +12,18 @@ use Codeception\Test\Unit;
 use Generated\Shared\Transfer\QuoteApprovalTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\QuoteApproval\QuoteApprovalConfig;
-use Spryker\Shared\QuoteApproval\StatusCalculator\QuoteApprovalStatusCalculator;
-use Spryker\Shared\QuoteApproval\StatusCalculator\QuoteApprovalStatusCalculatorInterface;
+use Spryker\Shared\QuoteApproval\QuoteStatus\QuoteStatusCalculator;
+use Spryker\Shared\QuoteApproval\QuoteStatus\QuoteStatusCalculatorInterface;
 
 /**
  * Auto-generated group annotations
  * @group SprykerTest
  * @group Shared
  * @group QuoteApproval
- * @group QuoteApprovalStatusCalculatorTest
+ * @group QuoteStatusCalculatorTest
  * Add your own group annotations below this line
  */
-class QuoteApprovalStatusCalculatorTest extends Unit
+class QuoteStatusCalculatorTest extends Unit
 {
     /**
      * @return void
@@ -35,7 +35,7 @@ class QuoteApprovalStatusCalculatorTest extends Unit
         ];
 
         $quoteTransfer = $this->createQuoteTransfer($statuses);
-        $result = $this->createQuoteApprovalStatusCalculator()->calculateQuoteStatus($quoteTransfer);
+        $result = $this->createQuoteStatusCalculator()->calculateQuoteStatus($quoteTransfer);
 
         $this->assertSame($result, QuoteApprovalConfig::STATUS_WAITING);
     }
@@ -50,7 +50,7 @@ class QuoteApprovalStatusCalculatorTest extends Unit
         ];
 
         $quoteTransfer = $this->createQuoteTransfer($statuses);
-        $result = $this->createQuoteApprovalStatusCalculator()->calculateQuoteStatus($quoteTransfer);
+        $result = $this->createQuoteStatusCalculator()->calculateQuoteStatus($quoteTransfer);
 
         $this->assertSame($result, QuoteApprovalConfig::STATUS_APPROVED);
     }
@@ -65,7 +65,7 @@ class QuoteApprovalStatusCalculatorTest extends Unit
         ];
 
         $quoteTransfer = $this->createQuoteTransfer($statuses);
-        $result = $this->createQuoteApprovalStatusCalculator()->calculateQuoteStatus($quoteTransfer);
+        $result = $this->createQuoteStatusCalculator()->calculateQuoteStatus($quoteTransfer);
 
         $this->assertSame($result, QuoteApprovalConfig::STATUS_DECLINED);
     }
@@ -81,7 +81,7 @@ class QuoteApprovalStatusCalculatorTest extends Unit
         ];
 
         $quoteTransfer = $this->createQuoteTransfer($statuses);
-        $result = $this->createQuoteApprovalStatusCalculator()->calculateQuoteStatus($quoteTransfer);
+        $result = $this->createQuoteStatusCalculator()->calculateQuoteStatus($quoteTransfer);
 
         $this->assertSame($result, QuoteApprovalConfig::STATUS_APPROVED);
     }
@@ -97,7 +97,7 @@ class QuoteApprovalStatusCalculatorTest extends Unit
         ];
 
         $quoteTransfer = $this->createQuoteTransfer($statuses);
-        $result = $this->createQuoteApprovalStatusCalculator()->calculateQuoteStatus($quoteTransfer);
+        $result = $this->createQuoteStatusCalculator()->calculateQuoteStatus($quoteTransfer);
 
         $this->assertSame($result, QuoteApprovalConfig::STATUS_WAITING);
     }
@@ -114,7 +114,7 @@ class QuoteApprovalStatusCalculatorTest extends Unit
         ];
 
         $quoteTransfer = $this->createQuoteTransfer($statuses);
-        $result = $this->createQuoteApprovalStatusCalculator()->calculateQuoteStatus($quoteTransfer);
+        $result = $this->createQuoteStatusCalculator()->calculateQuoteStatus($quoteTransfer);
 
         $this->assertSame($result, QuoteApprovalConfig::STATUS_APPROVED);
     }
@@ -125,7 +125,7 @@ class QuoteApprovalStatusCalculatorTest extends Unit
     public function testCalculateQuoteStatusWithEmptyDataShouldReturnNull(): void
     {
         $quoteTransfer = $this->createQuoteTransfer();
-        $result = $this->createQuoteApprovalStatusCalculator()->calculateQuoteStatus($quoteTransfer);
+        $result = $this->createQuoteStatusCalculator()->calculateQuoteStatus($quoteTransfer);
 
         $this->assertNull($result);
     }
@@ -160,10 +160,10 @@ class QuoteApprovalStatusCalculatorTest extends Unit
     }
 
     /**
-     * @return \Spryker\Shared\QuoteApproval\StatusCalculator\QuoteApprovalStatusCalculatorInterface
+     * @return \Spryker\Shared\QuoteApproval\QuoteStatus\QuoteStatusCalculatorInterface
      */
-    protected function createQuoteApprovalStatusCalculator(): QuoteApprovalStatusCalculatorInterface
+    protected function createQuoteStatusCalculator(): QuoteStatusCalculatorInterface
     {
-        return new QuoteApprovalStatusCalculator();
+        return new QuoteStatusCalculator();
     }
 }
