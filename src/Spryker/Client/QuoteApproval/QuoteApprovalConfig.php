@@ -5,9 +5,9 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\QuoteApproval;
+namespace Spryker\Client\QuoteApproval;
 
-use Spryker\Zed\Kernel\AbstractBundleConfig;
+use Spryker\Client\Kernel\AbstractBundleConfig;
 
 /**
  * @method \Spryker\Shared\QuoteApproval\QuoteApprovalConfig getSharedConfig()
