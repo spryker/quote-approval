@@ -46,10 +46,12 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
      */
     public function updateQuoteApprovalWithStatus(int $idQuoteApproval, string $status): void
     {
-        $this->getFactory()
+        $object = $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByIdQuoteApproval($idQuoteApproval)
-            ->update([ucfirst(SpyQuoteApprovalEntityTransfer::STATUS) => $status]);
+            ->findOne();
+        $object->setStatus($status);
+        $object->save();
     }
 
     /**
@@ -62,6 +64,7 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
         $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByIdQuoteApproval($idQuoteApproval)
+            ->find()
             ->delete();
     }
 
@@ -72,9 +75,13 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
      */
     public function removeApprovalsByIdQuote(int $idQuote): void
     {
-        $this->getFactory()
+        $approvals = $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByFkQuote($idQuote)
-            ->delete();
+            ->find();
+
+        foreach ($approvals as $approval) {
+            $approval->delete();
+        }
     }
 }
