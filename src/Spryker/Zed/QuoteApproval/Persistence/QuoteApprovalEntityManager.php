@@ -1,9 +1,11 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * This file is part of the Spryker Commerce OS.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
+
+declare(strict_types=1);
 
 namespace Spryker\Zed\QuoteApproval\Persistence;
 
@@ -46,10 +48,17 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
      */
     public function updateQuoteApprovalWithStatus(int $idQuoteApproval, string $status): void
     {
-        $this->getFactory()
+        $quoteApprovalEntity = $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByIdQuoteApproval($idQuoteApproval)
-            ->update([ucfirst(SpyQuoteApprovalEntityTransfer::STATUS) => $status]);
+            ->findOne();
+
+        if (!$quoteApprovalEntity) {
+            return;
+        }
+
+        $quoteApprovalEntity->setStatus($status)
+            ->save();
     }
 
     /**
@@ -62,6 +71,7 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
         $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByIdQuoteApproval($idQuoteApproval)
+            ->findOne()
             ->delete();
     }
 
@@ -72,9 +82,13 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
      */
     public function removeApprovalsByIdQuote(int $idQuote): void
     {
-        $this->getFactory()
+        $quoteApprovalEntities = $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByFkQuote($idQuote)
-            ->delete();
+            ->find();
+
+        foreach ($quoteApprovalEntities as $quoteApprovalEntity) {
+            $quoteApprovalEntity->delete();
+        }
     }
 }
