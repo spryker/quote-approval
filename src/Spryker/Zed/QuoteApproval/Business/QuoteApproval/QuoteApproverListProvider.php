@@ -30,10 +30,6 @@ class QuoteApproverListProvider implements QuoteApproverListProviderInterface
      */
     protected $companyUserFacade;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyRoleFacadeInterface $companyRoleFacade
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyUserFacadeInterface $companyUserFacade
-     */
     public function __construct(
         QuoteApprovalToCompanyRoleFacadeInterface $companyRoleFacade,
         QuoteApprovalToCompanyUserFacadeInterface $companyUserFacade
@@ -42,11 +38,6 @@ class QuoteApproverListProvider implements QuoteApproverListProviderInterface
         $this->companyUserFacade = $companyUserFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     public function getApproversList(QuoteTransfer $quoteTransfer): CompanyUserCollectionTransfer
     {
         $quoteTransfer
@@ -64,11 +55,6 @@ class QuoteApproverListProvider implements QuoteApproverListProviderInterface
         return $companyUserCollectionTransfer;
     }
 
-    /**
-     * @param array $companyUserIds
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     protected function getCompanyUserCollectionByIds(array $companyUserIds): CompanyUserCollectionTransfer
     {
         if (!$companyUserIds) {
@@ -81,12 +67,6 @@ class QuoteApproverListProvider implements QuoteApproverListProviderInterface
         return $this->companyUserFacade->getCompanyUserCollection($filterTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserCollectionTransfer $companyUserCollectionTransfer
-     * @param int $idBusinessUnit
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
     protected function filterByBusinessUnit(CompanyUserCollectionTransfer $companyUserCollectionTransfer, int $idBusinessUnit): CompanyUserCollectionTransfer
     {
         $companyUsers = $companyUserCollectionTransfer->getCompanyUsers()->getArrayCopy();

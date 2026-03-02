@@ -53,9 +53,6 @@ class QuoteApprovalFacadeTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testIsQuoteReadyForCheckoutIsSuccessful(): void
     {
         // Arrange
@@ -71,9 +68,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertEmpty($checkoutResponseTransfer->getErrors());
     }
 
-    /**
-     * @return void
-     */
     public function testIsQuoteReadyForCheckoutIsNotSuccessful(): void
     {
         // Arrange
@@ -92,9 +86,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertNotEmpty($checkoutResponseTransfer->getErrors());
     }
 
-    /**
-     * @return void
-     */
     public function testGetQuoteFieldsAllowedForSavingByQuoteApprovalStatusReturnsCorrectQuoteFields(): void
     {
         // Arrange
@@ -112,9 +103,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertCount(0, $quoteFieldsAllowedForSaving);
     }
 
-    /**
-     * @return void
-     */
     public function testGetQuoteFieldsAllowedForSavingByQuoteApprovalStatusNotReturnsRequiredQuoteFields(): void
     {
         // Arrange
@@ -133,9 +121,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertSame($requiredQuoteFields, $quoteFieldsAllowedForSaving);
     }
 
-    /**
-     * @return void
-     */
     public function testQuoteFieldsAllowedForSavingSaveShippingAddressFails(): void
     {
         // Arrange
@@ -152,9 +137,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertNotEquals($addressTransfer, $quoteTransfer->getShippingAddress());
     }
 
-    /**
-     * @return void
-     */
     public function testApproveQuoteApprovalSuccess(): void
     {
         // Arrange
@@ -168,9 +150,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertTrue($quoteApprovalResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testDeclineQuoteApprovalSuccess(): void
     {
         // Arrange
@@ -184,9 +163,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertTrue($quoteApprovalResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateQuoteApprovalQuoteShouldBeSharedWithApproverOnly(): void
     {
         // Arrange
@@ -208,9 +184,6 @@ class QuoteApprovalFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testCreateQuoteApprovalApprovalShouldBeCreated(): void
     {
         // Arrange
@@ -227,9 +200,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertCount(1, $quoteTransfer->getQuoteApprovals());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateQuoteApprovalNotSuccessfullWithApproverLimitLessThatQuoteGrantTotal(): void
     {
         // Arrange
@@ -244,9 +214,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertFalse($quoteApprovalResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateQuoteApprovalNotSuccessfulIfApproverDoesNotHavePermission(): void
     {
         // Arrange
@@ -261,9 +228,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertFalse($quoteApprovalResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateQuoteApprovalNotSuccessfulIfSentNotByQuoteOwner(): void
     {
         // Arrange
@@ -283,9 +247,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertFalse($quoteApprovalResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateQuoteApprovalNotSuccessfulIfSentTwice(): void
     {
         // Arrange
@@ -299,9 +260,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertFalse($quoteApprovalResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testRemoveQuoteApprovalRemovesCartSharings(): void
     {
         // Arrange
@@ -320,9 +278,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertCount(0, $shareDeatailCollectionTransfer->getShareDetails());
     }
 
-    /**
-     * @return void
-     */
     public function testRemoveQuoteApprovalRemovesApprovalRequest(): void
     {
         // Arrange
@@ -343,9 +298,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertCount(0, $quoteApprovalTransfers);
     }
 
-    /**
-     * @return void
-     */
     public function testRemoveQuoteApprovalNotSuccessfulIfSentNotByQuoteOwner(): void
     {
         // Arrange
@@ -363,9 +315,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertFalse($quoteApprovalResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testSanitizeQuoteApprovalSanitizeAllApprovalsFromQuoteAndRemovesFromDatabase(): void
     {
         // Arrange
@@ -383,9 +332,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertEmpty($quoteApprovalTransfers);
     }
 
-    /**
-     * @return void
-     */
     public function testSanitizeQuoteApprovalSanitizeAllApprovalsFromQuoteWithoutRemoving(): void
     {
         // Arrange
@@ -404,11 +350,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->assertCount(1, $quoteApprovalTransfers);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalCreateRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalRequestTransfer
-     */
     protected function createValidQuoteApprovalRemoveRequestTransfer(
         QuoteApprovalRequestTransfer $quoteApprovalCreateRequestTransfer
     ): QuoteApprovalRequestTransfer {
@@ -424,11 +365,6 @@ class QuoteApprovalFacadeTest extends Unit
         return $quoteApprovalRemoveRequestTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalCreateRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalRequestTransfer
-     */
     protected function createValidQuoteApprovalRequestTransfer(
         QuoteApprovalRequestTransfer $quoteApprovalCreateRequestTransfer
     ): QuoteApprovalRequestTransfer {
@@ -444,9 +380,6 @@ class QuoteApprovalFacadeTest extends Unit
         return $quoteApprovalRequestTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteApprovalRequestTransfer
-     */
     protected function createValidQuoteApprovalCreateRequestTransfer(): QuoteApprovalRequestTransfer
     {
         $this->prepareEnvForQuoteApprovalCreation();
@@ -461,12 +394,6 @@ class QuoteApprovalFacadeTest extends Unit
         return $quoteApprovalCreateRequestTransfer;
     }
 
-    /**
-     * @param int $amount
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
     protected function approverCanApproveUpToAmount(int $amount, QuoteTransfer $quoteTransfer): void
     {
         $this->addApproveQuotePermission([
@@ -478,11 +405,6 @@ class QuoteApprovalFacadeTest extends Unit
         ]);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalRequestTransfer
-     */
     protected function createQuoteApprovalCreateRequestTransfer(QuoteTransfer $quoteTransfer): QuoteApprovalRequestTransfer
     {
         $this->prepareEnvForQuoteApprovalCreation();
@@ -513,11 +435,6 @@ class QuoteApprovalFacadeTest extends Unit
         $this->setApproverPermissions($permissionCollectionTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PermissionCollectionTransfer $permissionCollectionTransfer
-     *
-     * @return void
-     */
     protected function setApproverPermissions(
         PermissionCollectionTransfer $permissionCollectionTransfer
     ): void {
@@ -530,11 +447,6 @@ class QuoteApprovalFacadeTest extends Unit
         ]);
     }
 
-    /**
-     * @param int $limitInCents
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function createQuoteWithGrandTotal(int $limitInCents): QuoteTransfer
     {
         $totalsTransfer = new TotalsTransfer();
@@ -567,9 +479,6 @@ class QuoteApprovalFacadeTest extends Unit
         return $quoteTransfer;
     }
 
-    /**
-     * @return void
-     */
     protected function prepareEnvForQuoteApprovalCreation(): void
     {
         $this->setApproverPermissions(new PermissionCollectionTransfer());
@@ -587,11 +496,6 @@ class QuoteApprovalFacadeTest extends Unit
         );
     }
 
-    /**
-     * @param int $idQuote
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer|null
-     */
     protected function findQuoteById(int $idQuote): ?QuoteTransfer
     {
         return $this->tester->getLocator()
@@ -601,11 +505,6 @@ class QuoteApprovalFacadeTest extends Unit
             ->getQuoteTransfer();
     }
 
-    /**
-     * @param int $idQuote
-     *
-     * @return \Generated\Shared\Transfer\ShareDetailCollectionTransfer
-     */
     protected function getShareDetailsByIdQuote(int $idQuote): ShareDetailCollectionTransfer
     {
         return $this->tester->getLocator()

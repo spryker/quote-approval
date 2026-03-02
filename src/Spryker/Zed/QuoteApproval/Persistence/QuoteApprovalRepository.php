@@ -100,11 +100,6 @@ class QuoteApprovalRepository extends AbstractRepository implements QuoteApprova
         return $quoteApprovalTransfers;
     }
 
-    /**
-     * @param int $idQuoteApproval
-     *
-     * @return int|null
-     */
     public function findIdQuoteByIdQuoteApproval(int $idQuoteApproval): ?int
     {
         $quoteApprovalEntity = $this->getFactory()

@@ -39,9 +39,6 @@ class PermissionContextProviderTest extends Unit
      */
     protected const QUOTE_SHIPMENT_PRICE = 200;
 
-    /**
-     * @return void
-     */
     public function testProvideContextShouldReturnGrandTotalInCentContextElement(): void
     {
         // Assign
@@ -59,9 +56,6 @@ class PermissionContextProviderTest extends Unit
         $this->assertSame(static::QUOTE_GRAND_TOTAL, $context[QuoteApprovalConfig::PERMISSION_CONTEXT_CENT_AMOUNT]);
     }
 
-    /**
-     * @return void
-     */
     public function testProvideContextShouldReturnGrandTotalWithoutShipmentInCentContextElement(): void
     {
         // Assign
@@ -79,11 +73,6 @@ class PermissionContextProviderTest extends Unit
         $this->assertSame(static::QUOTE_GRAND_TOTAL - static::QUOTE_SHIPMENT_PRICE, $context[QuoteApprovalConfig::PERMISSION_CONTEXT_CENT_AMOUNT]);
     }
 
-    /**
-     * @param bool $isPermissionCalculationIncludeShipment
-     *
-     * @return \Spryker\Zed\QuoteApproval\QuoteApprovalConfig
-     */
     protected function getMockedZedConfig(bool $isPermissionCalculationIncludeShipment): QuoteApprovalZedConfig
     {
         /** @var \Spryker\Zed\QuoteApproval\QuoteApprovalConfig $quoteApprovalConfigMock */
@@ -99,9 +88,6 @@ class PermissionContextProviderTest extends Unit
         return $quoteApprovalConfigMock;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function buildQuoteTransfer(): QuoteTransfer
     {
         return (new QuoteBuilder())

@@ -11,17 +11,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface QuoteLockerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
     public function lockQuote(QuoteTransfer $quoteTransfer): void;
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
     public function unlockQuote(QuoteTransfer $quoteTransfer): void;
 }

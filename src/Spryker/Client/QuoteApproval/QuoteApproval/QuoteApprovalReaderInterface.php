@@ -12,19 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface QuoteApprovalReaderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer|null
-     */
     public function findWaitingQuoteApprovalByIdCompanyUser(QuoteTransfer $quoteTransfer, int $idCompanyUser): ?QuoteApprovalTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param int $idCompanyUser
-     *
-     * @return bool
-     */
     public function isCompanyUserInQuoteApproverList(QuoteTransfer $quoteTransfer, int $idCompanyUser): bool;
 }

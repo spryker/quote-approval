@@ -18,19 +18,11 @@ class PermissionContextProvider implements PermissionContextProviderInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\QuoteApprovalConfig $config
-     */
     public function __construct(QuoteApprovalConfig $config)
     {
         $this->config = $config;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return array
-     */
     public function provideContext(QuoteTransfer $quoteTransfer): array
     {
         return [
@@ -40,11 +32,6 @@ class PermissionContextProvider implements PermissionContextProviderInterface
         ];
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return int
-     */
     protected function getQuoteSum(QuoteTransfer $quoteTransfer): int
     {
         if ($quoteTransfer->getTotals() === null) {

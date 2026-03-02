@@ -39,10 +39,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
      */
     protected $permissionContextProvider;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Business\Quote\QuoteStatusCalculatorInterface $quoteStatusCalculator
-     * @param \Spryker\Zed\QuoteApproval\Business\Permission\ContextProvider\PermissionContextProviderInterface $permissionContextProvider
-     */
     public function __construct(
         QuoteStatusCalculatorInterface $quoteStatusCalculator,
         PermissionContextProviderInterface $permissionContextProvider
@@ -81,12 +77,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
         return $quoteStatus === QuoteApprovalConfig::STATUS_WAITING;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
     public function isQuoteReadyForCheckout(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer): CheckoutResponseTransfer
     {
         $quoteStatus = $this->quoteStatusCalculator
@@ -107,12 +97,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
         return $checkoutResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param string|null $quoteStatus
-     *
-     * @return bool
-     */
     protected function isQuoteApprovalRequired(QuoteTransfer $quoteTransfer, ?string $quoteStatus): bool
     {
         $idCompanyUser = $quoteTransfer->getCustomer()
@@ -127,12 +111,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
         return $quoteStatus !== QuoteApprovalConfig::STATUS_APPROVED;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
-     * @param string $message
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
     protected function addCheckoutError(CheckoutResponseTransfer $checkoutResponseTransfer, string $message): CheckoutResponseTransfer
     {
         $checkoutResponseTransfer->setIsSuccess(false)

@@ -24,10 +24,6 @@ class QuoteApprovalSanitizer implements QuoteApprovalSanitizerInterface
      */
     protected $quoteApprovalRepository;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalEntityManagerInterface $quoteApprovalEntityManager
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalRepositoryInterface $quoteApprovalRepository
-     */
     public function __construct(
         QuoteApprovalEntityManagerInterface $quoteApprovalEntityManager,
         QuoteApprovalRepositoryInterface $quoteApprovalRepository
@@ -36,11 +32,6 @@ class QuoteApprovalSanitizer implements QuoteApprovalSanitizerInterface
         $this->quoteApprovalRepository = $quoteApprovalRepository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function sanitizeQuoteApproval(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getIdQuote()) {

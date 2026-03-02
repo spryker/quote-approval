@@ -49,9 +49,6 @@ class QuoteApprovalBusinessTester extends Actor
         return new ArrayObject($quoteApprovalTransfers);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function createQuoteTransfer(): QuoteTransfer
     {
         $customerTransfer = $this->haveCustomer();
@@ -73,9 +70,6 @@ class QuoteApprovalBusinessTester extends Actor
         return $quoteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     */
     public function createCompanyUser(): CompanyUserTransfer
     {
         $customerTransfer = $this->haveCustomer();

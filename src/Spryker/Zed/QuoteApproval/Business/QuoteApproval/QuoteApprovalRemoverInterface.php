@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\QuoteApprovalResponseTransfer;
 
 interface QuoteApprovalRemoverInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function removeQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer;
 }

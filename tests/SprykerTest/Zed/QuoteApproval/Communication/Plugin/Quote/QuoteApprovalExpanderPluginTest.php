@@ -32,9 +32,6 @@ class QuoteApprovalExpanderPluginTest extends Unit
      */
     protected const FAKE_ID_QUOTE = 12345;
 
-    /**
-     * @return void
-     */
     public function testExpandQuoteWithPreloadedQuoteApprovals(): void
     {
         // Arrange
@@ -71,9 +68,6 @@ class QuoteApprovalExpanderPluginTest extends Unit
         $property->setValue($quoteApprovalExpanderPlugin, $indexedQuoteApprovals);
     }
 
-    /**
-     * @return \Spryker\Zed\QuoteApproval\Communication\Plugin\Quote\QuoteApprovalExpanderPlugin
-     */
     protected function createQuoteApprovalExpanderPlugin(): QuoteApprovalExpanderPlugin
     {
         return new QuoteApprovalExpanderPlugin();

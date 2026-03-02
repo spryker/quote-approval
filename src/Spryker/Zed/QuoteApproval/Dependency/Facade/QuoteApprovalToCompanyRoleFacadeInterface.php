@@ -19,10 +19,5 @@ interface QuoteApprovalToCompanyRoleFacadeInterface
      */
     public function getCompanyUserIdsByPermissionKey(string $permissionKey, ?int $idCompany = null): array;
 
-    /**
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\PermissionCollectionTransfer
-     */
     public function findPermissionsByIdCompanyUser(int $idCompanyUser): PermissionCollectionTransfer;
 }

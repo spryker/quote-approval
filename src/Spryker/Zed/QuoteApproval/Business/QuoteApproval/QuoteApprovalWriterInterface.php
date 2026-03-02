@@ -12,17 +12,7 @@ use Generated\Shared\Transfer\QuoteApprovalResponseTransfer;
 
 interface QuoteApprovalWriterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function approveQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function declineQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer;
 }

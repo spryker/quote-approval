@@ -32,17 +32,11 @@ use Spryker\Client\QuoteApproval\Zed\QuoteApprovalStubInterface;
  */
 class QuoteApprovalFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Client\QuoteApproval\Quote\QuoteStatusCalculatorInterface
-     */
     public function createQuoteStatusCalculator(): QuoteStatusCalculatorInterface
     {
         return new QuoteStatusCalculator();
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\Quote\QuoteStatusCheckerInterface
-     */
     public function createQuoteStatusChecker(): QuoteStatusCheckerInterface
     {
         return new QuoteStatusChecker(
@@ -51,9 +45,6 @@ class QuoteApprovalFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\Checker\QuoteCheckerInterface
-     */
     public function createQuoteChecker(): QuoteCheckerInterface
     {
         return new QuoteChecker(
@@ -62,33 +53,21 @@ class QuoteApprovalFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\Permission\ContextProvider\PermissionContextProviderInterface
-     */
     public function createPermissionContextProvider(): PermissionContextProviderInterface
     {
         return new PermissionContextProvider($this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\QuoteApproval\QuoteApprovalReaderInterface
-     */
     public function createQuoteApprovalReader(): QuoteApprovalReaderInterface
     {
         return new QuoteApprovalReader();
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\Permission\PermissionLimitCalculatorInterface
-     */
     public function createPermissionLimitCalculator(): PermissionLimitCalculatorInterface
     {
         return new PermissionLimitCalculator();
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\Zed\QuoteApprovalStubInterface
-     */
     public function createQuoteApprovalStub(): QuoteApprovalStubInterface
     {
         return new QuoteApprovalStub(
@@ -96,9 +75,6 @@ class QuoteApprovalFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\QuoteApproval\QuoteApprovalCreatorInterface
-     */
     public function createQuoteApprovalCreator(): QuoteApprovalCreatorInterface
     {
         return new QuoteApprovalCreator(
@@ -107,17 +83,11 @@ class QuoteApprovalFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\Dependency\Client\QuoteApprovalToZedRequestClientInterface
-     */
     public function getZedRequestClient(): QuoteApprovalToZedRequestClientInterface
     {
         return $this->getProvidedDependency(QuoteApprovalDependencyProvider::CLIENT_ZED_REQUEST);
     }
 
-    /**
-     * @return \Spryker\Client\QuoteApproval\Dependency\Client\QuoteApprovalToQuoteClientInterface
-     */
     public function getQuoteClient(): QuoteApprovalToQuoteClientInterface
     {
         return $this->getProvidedDependency(QuoteApprovalDependencyProvider::CLIENT_QUOTE);

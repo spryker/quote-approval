@@ -16,12 +16,6 @@ use Spryker\Client\QuoteApproval\Plugin\Permission\PlaceOrderPermissionPlugin;
 
 class PermissionLimitCalculator implements PermissionLimitCalculatorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return int|null
-     */
     public function calculateApproveQuotePermissionLimit(QuoteTransfer $quoteTransfer, CompanyUserTransfer $companyUserTransfer): ?int
     {
         return $this->calculateLimitForQuoteByPermissionAndCompanyUser(
@@ -32,12 +26,6 @@ class PermissionLimitCalculator implements PermissionLimitCalculatorInterface
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return int|null
-     */
     public function calculatePlaceOrderPermissionLimit(QuoteTransfer $quoteTransfer, CompanyUserTransfer $companyUserTransfer): ?int
     {
         return $this->calculateLimitForQuoteByPermissionAndCompanyUser(
@@ -90,13 +78,6 @@ class PermissionLimitCalculator implements PermissionLimitCalculatorInterface
         return $highestLimit;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PermissionTransfer $permission
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param string $configurationKey
-     *
-     * @return int|null
-     */
     protected function findPermissionLimitForQuote(
         PermissionTransfer $permission,
         QuoteTransfer $quoteTransfer,
@@ -109,12 +90,6 @@ class PermissionLimitCalculator implements PermissionLimitCalculatorInterface
         return $configuration[$configurationKey][$storeName][$currencyCode] ?? null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PermissionCollectionTransfer $permissionCollectionTransfer
-     * @param string $permissionKey
-     *
-     * @return \Generated\Shared\Transfer\PermissionTransfer|null
-     */
     protected function findPermissionByKey(
         PermissionCollectionTransfer $permissionCollectionTransfer,
         string $permissionKey

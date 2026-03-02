@@ -51,9 +51,6 @@ class ApproveQuotePermissionPluginTest extends Unit
      */
     protected const STORE_NAME = 'DE';
 
-    /**
-     * @return void
-     */
     public function testCanWithValidDataReturnTrue(): void
     {
         $configuration = [];
@@ -65,9 +62,6 @@ class ApproveQuotePermissionPluginTest extends Unit
         $this->assertTrue($result);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithNullConfigurationCentAmountDataReturnTrue(): void
     {
         $configuration = [];
@@ -79,9 +73,6 @@ class ApproveQuotePermissionPluginTest extends Unit
         $this->assertTrue($result);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithZeroConfigurationCentAmountDataReturnFalse(): void
     {
         $configuration = [];
@@ -93,9 +84,6 @@ class ApproveQuotePermissionPluginTest extends Unit
         $this->assertFalse($result);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithEmptyQuoteReturnFalse(): void
     {
         $configuration = [];
@@ -107,9 +95,6 @@ class ApproveQuotePermissionPluginTest extends Unit
         $this->assertFalse($result);
     }
 
-    /**
-     * @return void
-     */
     public function testCanWithLessGrandTotalAmountReturnFalse(): void
     {
         $configuration = [];
@@ -121,9 +106,6 @@ class ApproveQuotePermissionPluginTest extends Unit
         $this->assertFalse($result);
     }
 
-    /**
-     * @return array
-     */
     protected function getContext(): array
     {
         return [
@@ -133,9 +115,6 @@ class ApproveQuotePermissionPluginTest extends Unit
         ];
     }
 
-    /**
-     * @return \Spryker\Shared\PermissionExtension\Dependency\Plugin\ExecutablePermissionPluginInterface
-     */
     protected function createApproveQuotePermissionPlugin(): ExecutablePermissionPluginInterface
     {
         return new ApproveQuotePermissionPlugin();

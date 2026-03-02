@@ -39,10 +39,6 @@ class QuoteApprovalMessageBuilder implements QuoteApprovalMessageBuilderInterfac
      */
     protected $customerFacade;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCustomerFacadeInterface $customerFacade
-     */
     public function __construct(
         QuoteApprovalToQuoteFacadeInterface $quoteFacade,
         QuoteApprovalToCustomerFacadeInterface $customerFacade
@@ -51,12 +47,6 @@ class QuoteApprovalMessageBuilder implements QuoteApprovalMessageBuilderInterfac
         $this->customerFacade = $customerFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     * @param string $status
-     *
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     public function getSuccessMessage(QuoteApprovalTransfer $quoteApprovalTransfer, string $status): MessageTransfer
     {
         $quoteResponseTransfer = $this->quoteFacade->findQuoteById($quoteApprovalTransfer->getFkQuote());

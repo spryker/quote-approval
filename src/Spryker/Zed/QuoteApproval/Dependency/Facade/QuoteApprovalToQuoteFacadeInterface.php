@@ -12,18 +12,8 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface QuoteApprovalToQuoteFacadeInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function lockQuote(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function unlockQuote(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
@@ -33,10 +23,5 @@ interface QuoteApprovalToQuoteFacadeInterface
      */
     public function findQuoteById($idQuote): QuoteResponseTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteResponseTransfer
-     */
     public function updateQuote(QuoteTransfer $quoteTransfer): QuoteResponseTransfer;
 }

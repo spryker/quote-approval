@@ -30,10 +30,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
      */
     protected $quoteChecker;
 
-    /**
-     * @param \Spryker\Client\QuoteApproval\Zed\QuoteApprovalStubInterface $quoteApprovalStub
-     * @param \Spryker\Client\QuoteApproval\Checker\QuoteCheckerInterface $quoteChecker
-     */
     public function __construct(
         QuoteApprovalStubInterface $quoteApprovalStub,
         QuoteCheckerInterface $quoteChecker
@@ -42,11 +38,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         $this->quoteChecker = $quoteChecker;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function createQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         if (

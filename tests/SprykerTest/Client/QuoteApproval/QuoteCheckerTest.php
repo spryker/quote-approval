@@ -29,9 +29,6 @@ class QuoteCheckerTest extends Unit
      */
     protected $quoteCheckerMock;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -39,9 +36,6 @@ class QuoteCheckerTest extends Unit
         $this->quoteCheckerMock = $this->createQuoteCheckerMock();
     }
 
-    /**
-     * @return void
-     */
     public function testIsQuoteApplicableForApprovalProcessChecksFullFilledQuoteTransfer(): void
     {
         // Arrange
@@ -59,9 +53,6 @@ class QuoteCheckerTest extends Unit
         $this->assertTrue($isQuoteApplicableForApproval);
     }
 
-    /**
-     * @return void
-     */
     public function testIsQuoteApplicableForApprovalProcessChecksNotFilledQuoteTransfer(): void
     {
         // Arrange
@@ -74,9 +65,6 @@ class QuoteCheckerTest extends Unit
         $this->assertFalse($isQuoteApplicableForApproval);
     }
 
-    /**
-     * @return void
-     */
     public function testIsQuoteApplicableForApprovalProcessChecksQuoteTransferWithoutRequiredField(): void
     {
         // Arrange

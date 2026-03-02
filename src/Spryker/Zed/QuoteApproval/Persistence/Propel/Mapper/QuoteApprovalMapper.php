@@ -14,12 +14,6 @@ use Orm\Zed\QuoteApproval\Persistence\SpyQuoteApproval;
 
 class QuoteApprovalMapper
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     * @param \Orm\Zed\QuoteApproval\Persistence\SpyQuoteApproval $quoteApprovalEntity
-     *
-     * @return \Orm\Zed\QuoteApproval\Persistence\SpyQuoteApproval
-     */
     public function mapQuoteApprovalTransferToEntity(
         QuoteApprovalTransfer $quoteApprovalTransfer,
         SpyQuoteApproval $quoteApprovalEntity
@@ -33,12 +27,6 @@ class QuoteApprovalMapper
         return $quoteApprovalEntity;
     }
 
-    /**
-     * @param \Orm\Zed\QuoteApproval\Persistence\SpyQuoteApproval $quoteApprovalEntity
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer
-     */
     public function mapQuoteApprovalEntityToTransfer(
         SpyQuoteApproval $quoteApprovalEntity,
         QuoteApprovalTransfer $quoteApprovalTransfer

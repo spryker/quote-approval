@@ -32,11 +32,6 @@ class QuoteApprovalDependencyProvider extends AbstractDependencyProvider
      */
     public const PLUGINS_QUOTE_APPLICABLE_FOR_APPROVAL_CHECK = 'PLUGINS_QUOTE_APPLICABLE_FOR_APPROVAL_CHECK';
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     public function provideServiceLayerDependencies(Container $container): Container
     {
         $container = parent::provideServiceLayerDependencies($container);
@@ -47,11 +42,6 @@ class QuoteApprovalDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addZedRequestClient(Container $container): Container
     {
         $container->set(static::CLIENT_ZED_REQUEST, function (Container $container) {
@@ -61,11 +51,6 @@ class QuoteApprovalDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addQuoteClient(Container $container): Container
     {
         $container->set(static::CLIENT_QUOTE, function (Container $container) {
@@ -75,11 +60,6 @@ class QuoteApprovalDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addQuoteApplicableForApprovalCheckPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_QUOTE_APPLICABLE_FOR_APPROVAL_CHECK, function () {

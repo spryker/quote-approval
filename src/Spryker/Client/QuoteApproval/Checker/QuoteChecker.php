@@ -33,11 +33,6 @@ class QuoteChecker implements QuoteCheckerInterface
         $this->quoteApplicableForApprovalCheckPlugins = $quoteApplicableForApprovalCheckPlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function isQuoteApplicableForApprovalProcess(QuoteTransfer $quoteTransfer): bool
     {
         $quoteData = $quoteTransfer->toArray(false, true);
@@ -55,11 +50,6 @@ class QuoteChecker implements QuoteCheckerInterface
         return $this->executeQuoteApplicableForApprovalCheckPlugins($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function executeQuoteApplicableForApprovalCheckPlugins(QuoteTransfer $quoteTransfer): bool
     {
         foreach ($this->quoteApplicableForApprovalCheckPlugins as $quoteApplicableForApprovalCheckPlugin) {

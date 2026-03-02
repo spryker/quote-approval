@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\QuoteApprovalResponseTransfer;
 
 interface QuoteApprovalCreatorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function createQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer;
 }

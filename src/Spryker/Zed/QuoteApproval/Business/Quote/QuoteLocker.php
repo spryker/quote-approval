@@ -34,22 +34,12 @@ class QuoteLocker implements QuoteLockerInterface
         $this->quoteApprovalUnlockPreCheckPlugins = $quoteApprovalUnlockPreCheckPlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
     public function lockQuote(QuoteTransfer $quoteTransfer): void
     {
         $quoteTransfer = $this->quoteFacade->lockQuote($quoteTransfer);
         $this->quoteFacade->updateQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
     public function unlockQuote(QuoteTransfer $quoteTransfer): void
     {
         if (!$this->executeQuoteApprovalUnlockPreCheckPlugins($quoteTransfer)) {
@@ -60,11 +50,6 @@ class QuoteLocker implements QuoteLockerInterface
         $this->quoteFacade->updateQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function executeQuoteApprovalUnlockPreCheckPlugins(QuoteTransfer $quoteTransfer): bool
     {
         foreach ($this->quoteApprovalUnlockPreCheckPlugins as $quoteApprovalUnlockPreCheckPlugin) {

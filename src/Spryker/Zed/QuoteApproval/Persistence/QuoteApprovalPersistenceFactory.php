@@ -18,17 +18,11 @@ use Spryker\Zed\QuoteApproval\Persistence\Propel\Mapper\QuoteApprovalMapper;
  */
 class QuoteApprovalPersistenceFactory extends AbstractPersistenceFactory
 {
-    /**
-     * @return \Orm\Zed\QuoteApproval\Persistence\SpyQuoteApprovalQuery
-     */
     public function createQuoteApprovalPropelQuery(): SpyQuoteApprovalQuery
     {
         return SpyQuoteApprovalQuery::create();
     }
 
-    /**
-     * @return \Spryker\Zed\QuoteApproval\Persistence\Propel\Mapper\QuoteApprovalMapper
-     */
     public function createQuoteApprovalMapper(): QuoteApprovalMapper
     {
         return new QuoteApprovalMapper();

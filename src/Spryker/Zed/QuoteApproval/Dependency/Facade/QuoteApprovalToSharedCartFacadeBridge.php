@@ -27,31 +27,16 @@ class QuoteApprovalToSharedCartFacadeBridge implements QuoteApprovalToSharedCart
         $this->sharedCartFacade = $sharedCartFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
-     */
     public function deleteShareForQuote(QuoteTransfer $quoteTransfer): void
     {
         $this->sharedCartFacade->deleteShareForQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ShareCartRequestTransfer $shareCartRequestTransfer
-     *
-     * @return void
-     */
     public function addQuoteCompanyUser(ShareCartRequestTransfer $shareCartRequestTransfer): void
     {
         $this->sharedCartFacade->addQuoteCompanyUser($shareCartRequestTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuotePermissionGroupCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuotePermissionGroupResponseTransfer
-     */
     public function getQuotePermissionGroupList(QuotePermissionGroupCriteriaFilterTransfer $criteriaFilterTransfer): QuotePermissionGroupResponseTransfer
     {
         return $this->sharedCartFacade->getQuotePermissionGroupList($criteriaFilterTransfer);

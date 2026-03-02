@@ -100,13 +100,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
      */
     protected $permissionContextProvider;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToQuoteFacadeInterface $quoteFacade
-     * @param \Spryker\Zed\QuoteApproval\Business\Quote\QuoteStatusCalculatorInterface $quoteStatusCalculator
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalRepositoryInterface $quoteApprovalRepository
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToCompanyUserFacadeInterface $companyUserFacade
-     * @param \Spryker\Zed\QuoteApproval\Business\Permission\ContextProvider\PermissionContextProviderInterface $permissionContextProvider
-     */
     public function __construct(
         QuoteApprovalToQuoteFacadeInterface $quoteFacade,
         QuoteStatusCalculatorInterface $quoteStatusCalculator,
@@ -121,11 +114,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         $this->permissionContextProvider = $permissionContextProvider;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function validateQuoteApprovalCreateRequest(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         $this->assertQuoteApprovalCreateRequestValid($quoteApprovalRequestTransfer);
@@ -156,11 +144,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
             ->setQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function validateQuoteApprovalRemoveRequest(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         $quoteTransfer = $this->findQuoteByIdQuoteApproval($quoteApprovalRequestTransfer->getIdQuoteApproval());
@@ -176,11 +159,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
             ->setQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function validateQuoteApprovalRequest(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         $this->assertQuoteApprovalRequestValid($quoteApprovalRequestTransfer);
@@ -209,12 +187,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
             ->setQuoteApproval($quoteApprovalTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $persistentQuoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function mergeQuotes(QuoteTransfer $quoteTransfer, QuoteTransfer $persistentQuoteTransfer): QuoteTransfer
     {
         $quoteTransfer->fromArray($persistentQuoteTransfer->modifiedToArray(), true);
@@ -222,22 +194,12 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         return $quoteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return void
-     */
     protected function assertQuoteApprovalRequestValid(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): void
     {
         $quoteApprovalRequestTransfer->requireApproverCompanyUserId()
             ->requireIdQuoteApproval();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return void
-     */
     protected function assertQuoteApprovalCreateRequestValid(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): void
     {
         $quoteApprovalRequestTransfer->requireApproverCompanyUserId()
@@ -253,11 +215,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         $quoteApprovalRequestTransfer->requireQuote();
     }
 
-    /**
-     * @param string $message
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function createUnsuccessfulValidationResponseTransfer(string $message): QuoteApprovalResponseTransfer
     {
         $quoteApprovalResponseTransfer = new QuoteApprovalResponseTransfer();
@@ -269,9 +226,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         return $quoteApprovalResponseTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function createSuccessfullValidationResponseTransfer(): QuoteApprovalResponseTransfer
     {
         $quoteApprovalResponseTransfer = new QuoteApprovalResponseTransfer();
@@ -280,11 +234,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         return $quoteApprovalResponseTransfer;
     }
 
-    /**
-     * @param int $idQuote
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function getQuoteById(int $idQuote): QuoteTransfer
     {
         $quoteResponseTransfer = $this->quoteFacade->findQuoteById($idQuote);
@@ -297,11 +246,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         return $quoteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return bool
-     */
     protected function isRemoveRequestSentByApprover(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): bool
     {
         $quoteApprovalTransfer = $this->quoteApprovalRepository->findQuoteApprovalById(
@@ -311,12 +255,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         return $quoteApprovalTransfer->getApproverCompanyUserId() === $quoteApprovalRequestTransfer->getRequesterCompanyUserId();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param int $idCompanyUser
-     *
-     * @return bool
-     */
     protected function isQuoteOwner(QuoteTransfer $quoteTransfer, int $idCompanyUser): bool
     {
         $companyUserTransfer = $this->companyUserFacade->getCompanyUserById($idCompanyUser);
@@ -324,12 +262,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         return $quoteTransfer->getCustomerReference() === $companyUserTransfer->getCustomer()->getCustomerReference();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param int $idCompanyUser
-     *
-     * @return bool
-     */
     protected function isApproverCanApproveQuote(QuoteTransfer $quoteTransfer, int $idCompanyUser): bool
     {
         return $this->can(
@@ -339,51 +271,26 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteApproved(QuoteTransfer $quoteTransfer): bool
     {
         return $this->quoteStatusCalculator->calculateQuoteStatus($quoteTransfer) === QuoteApprovalConfig::STATUS_APPROVED;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteWaitingForApproval(QuoteTransfer $quoteTransfer): bool
     {
         return $this->quoteStatusCalculator->calculateQuoteStatus($quoteTransfer) === QuoteApprovalConfig::STATUS_WAITING;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteApprovalRequestCanceled(QuoteTransfer $quoteTransfer): bool
     {
         return $this->quoteStatusCalculator->calculateQuoteStatus($quoteTransfer) === null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteDeclined(QuoteTransfer $quoteTransfer): bool
     {
         return $this->quoteStatusCalculator->calculateQuoteStatus($quoteTransfer) === QuoteApprovalConfig::STATUS_DECLINED;
     }
 
-    /**
-     * @param int $idQuoteApproval
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer|null
-     */
     protected function findQuoteByIdQuoteApproval(int $idQuoteApproval): ?QuoteTransfer
     {
         $idQuote = $this->quoteApprovalRepository->findIdQuoteByIdQuoteApproval($idQuoteApproval);
@@ -395,11 +302,6 @@ class QuoteApprovalRequestValidator implements QuoteApprovalRequestValidatorInte
         return $this->getQuoteById($idQuote);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function resolveQuote(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteTransfer
     {
         $idQuote = $quoteApprovalRequestTransfer->getIdQuote() ?? $quoteApprovalRequestTransfer->getQuote()->getIdQuote();

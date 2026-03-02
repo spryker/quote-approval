@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Client\QuoteApproval\Business;
+namespace SprykerTest\Client\QuoteApproval;
 
 use Codeception\Test\Unit;
 use Generated\Shared\DataBuilder\QuoteBuilder;
@@ -23,7 +23,6 @@ use Spryker\Shared\QuoteApproval\QuoteApprovalConfig as SharedQuoteApprovalConfi
  * @group SprykerTest
  * @group Client
  * @group QuoteApproval
- * @group Business
  * @group PermissionContextProviderTest
  * Add your own group annotations below this line
  */
@@ -39,9 +38,6 @@ class PermissionContextProviderTest extends Unit
      */
     protected const QUOTE_SHIPMENT_PRICE = 200;
 
-    /**
-     * @return void
-     */
     public function testProvideContextShouldReturnGrandTotalInCentContextElement(): void
     {
         // Assign
@@ -59,9 +55,6 @@ class PermissionContextProviderTest extends Unit
         $this->assertSame(static::QUOTE_GRAND_TOTAL, $context[SharedQuoteApprovalConfig::PERMISSION_CONTEXT_CENT_AMOUNT]);
     }
 
-    /**
-     * @return void
-     */
     public function testProvideContextShouldReturnGrandTotalWithoutShipmentInCentContextElement(): void
     {
         // Assign
@@ -79,11 +72,6 @@ class PermissionContextProviderTest extends Unit
         $this->assertSame(static::QUOTE_GRAND_TOTAL - static::QUOTE_SHIPMENT_PRICE, $context[SharedQuoteApprovalConfig::PERMISSION_CONTEXT_CENT_AMOUNT]);
     }
 
-    /**
-     * @param bool $isPermissionCalculationIncludeShipment
-     *
-     * @return \Spryker\Client\QuoteApproval\QuoteApprovalConfig
-     */
     protected function getMockedZedConfig(bool $isPermissionCalculationIncludeShipment): QuoteApprovalConfig
     {
         /** @var \Spryker\Client\QuoteApproval\QuoteApprovalConfig $quoteApprovalConfigMock */
@@ -99,9 +87,6 @@ class PermissionContextProviderTest extends Unit
         return $quoteApprovalConfigMock;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function buildQuoteTransfer(): QuoteTransfer
     {
         return (new QuoteBuilder())

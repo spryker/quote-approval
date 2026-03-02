@@ -22,10 +22,6 @@ class QuoteFieldsProvider implements QuoteFieldsProviderInterface
      */
     protected $quoteApprovalConfig;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Business\Quote\QuoteStatusCheckerInterface $quoteStatusChecker
-     * @param \Spryker\Zed\QuoteApproval\QuoteApprovalConfig $quoteApprovalConfig
-     */
     public function __construct(
         QuoteStatusCheckerInterface $quoteStatusChecker,
         QuoteApprovalConfig $quoteApprovalConfig

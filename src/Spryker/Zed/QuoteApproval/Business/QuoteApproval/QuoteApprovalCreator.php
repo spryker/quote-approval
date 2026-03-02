@@ -66,13 +66,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
      */
     protected $quoteApprovalRepository;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Business\Quote\QuoteLockerInterface $quoteLocker
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToSharedCartFacadeInterface $sharedCartFacade
-     * @param \Spryker\Zed\QuoteApproval\Business\QuoteApproval\QuoteApprovalRequestValidatorInterface $quoteApprovalRequestValidator
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalEntityManagerInterface $quoteApprovalEntityManager
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalRepositoryInterface $quoteApprovalRepository
-     */
     public function __construct(
         QuoteLockerInterface $quoteLocker,
         QuoteApprovalToSharedCartFacadeInterface $sharedCartFacade,
@@ -87,11 +80,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         $this->quoteApprovalRepository = $quoteApprovalRepository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function createQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($quoteApprovalRequestTransfer) {
@@ -99,11 +87,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function executeCreateQuoteApprovalTransaction(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         $quoteApprovalResponseTransfer = $this->quoteApprovalRequestValidator
@@ -124,12 +107,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
             );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalResponseTransfer $quoteApprovalResponseTransfer
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer
-     */
     protected function executeQuoteApprovalCreation(
         QuoteApprovalResponseTransfer $quoteApprovalResponseTransfer,
         QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
@@ -153,11 +130,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         return $quoteApprovalTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     *
-     * @return void
-     */
     protected function shareQuoteToApprover(QuoteApprovalTransfer $quoteApprovalTransfer): void
     {
         $quotePermissionGroup = $this->findSharedCartPermissionGroup();
@@ -173,12 +145,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         $this->sharedCartFacade->addQuoteCompanyUser($shareCartRequestTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return bool
-     */
     protected function isQuoteOwner(QuoteTransfer $quoteTransfer, CompanyUserTransfer $companyUserTransfer): bool
     {
         $quoteApproverCustomerReference = $companyUserTransfer->getCustomer()->getCustomerReference();
@@ -186,9 +152,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         return $quoteTransfer->getCustomerReference() === $quoteApproverCustomerReference;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuotePermissionGroupTransfer|null
-     */
     protected function findSharedCartPermissionGroup(): ?QuotePermissionGroupTransfer
     {
         $criteriaFilterTransfer = (new QuotePermissionGroupCriteriaFilterTransfer())
@@ -202,11 +165,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         return $quotePermissionGroupResponseTransfer->getQuotePermissionGroups()->offsetGet(0);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function createSuccessfulQuoteApprovalResponseTransfer(QuoteApprovalTransfer $quoteApprovalTransfer): QuoteApprovalResponseTransfer
     {
         $approverCustomerTransfer = $quoteApprovalTransfer->getApprover()->getCustomer();
@@ -224,12 +182,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
             );
     }
 
-    /**
-     * @param string $message
-     * @param array $parameters
-     *
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     protected function createMessageTransfer(string $message, array $parameters = []): MessageTransfer
     {
         return (new MessageTransfer())
@@ -237,11 +189,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
             ->setParameters($parameters);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function expandQuoteWithQuoteApprovals(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $quoteTransfer->setQuoteApprovals(
@@ -249,12 +196,6 @@ class QuoteApprovalCreator implements QuoteApprovalCreatorInterface
         );
     }
 
-    /**
-     * @param int $idQuote
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer
-     */
     protected function createQuoteApprovalTransfer(int $idQuote, int $idCompanyUser): QuoteApprovalTransfer
     {
         return (new QuoteApprovalTransfer())

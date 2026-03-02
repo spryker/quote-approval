@@ -47,13 +47,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
      */
     protected $quoteApprovalRepository;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Business\QuoteApproval\QuoteApprovalRequestValidatorInterface $quoteApprovalRequestValidator
-     * @param \Spryker\Zed\QuoteApproval\Business\QuoteApproval\QuoteApprovalMessageBuilderInterface $quoteApprovalMessageBuilder
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalEntityManagerInterface $quoteApprovalEntityManager
-     * @param \Spryker\Zed\QuoteApproval\Business\Quote\QuoteLockerInterface $quoteLocker
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalRepositoryInterface $quoteApprovalRepository
-     */
     public function __construct(
         QuoteApprovalRequestValidatorInterface $quoteApprovalRequestValidator,
         QuoteApprovalMessageBuilderInterface $quoteApprovalMessageBuilder,
@@ -68,11 +61,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
         $this->quoteApprovalRepository = $quoteApprovalRepository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function approveQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($quoteApprovalRequestTransfer) {
@@ -80,11 +68,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function declineQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($quoteApprovalRequestTransfer) {
@@ -92,11 +75,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function executeDeclineQuoteApprovalTransaction(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         $quoteApprovalResponseTransfer = $this->quoteApprovalRequestValidator
@@ -123,11 +101,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
             ->setQuote($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function executeApproveQuoteApprovalTransaction(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         $quoteApprovalResponseTransfer = $this->quoteApprovalRequestValidator
@@ -164,12 +137,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
             ->setIsSuccessful(false);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $updatedQuoteApprovalTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function replaceQuoteApprovalInQuote(QuoteTransfer $quoteTransfer, QuoteApprovalTransfer $updatedQuoteApprovalTransfer): QuoteTransfer
     {
         foreach ($quoteTransfer->getQuoteApprovals() as $key => $quoteApprovalTransfer) {
@@ -183,12 +150,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
         return $quoteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     * @param string $status
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer
-     */
     protected function updateQuoteApprovalWithStatus(QuoteApprovalTransfer $quoteApprovalTransfer, string $status): QuoteApprovalTransfer
     {
         $this->quoteApprovalEntityManager->updateQuoteApprovalWithStatus(
@@ -199,11 +160,6 @@ class QuoteApprovalWriter implements QuoteApprovalWriterInterface
         return $quoteApprovalTransfer->setStatus($status);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function createSuccessfulQuoteApprovalResponseTransfer(QuoteApprovalTransfer $quoteApprovalTransfer): QuoteApprovalResponseTransfer
     {
         return (new QuoteApprovalResponseTransfer())

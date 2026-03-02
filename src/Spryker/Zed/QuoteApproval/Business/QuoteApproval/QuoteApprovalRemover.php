@@ -52,13 +52,6 @@ class QuoteApprovalRemover implements QuoteApprovalRemoverInterface
      */
     protected $quoteApprovalRepository;
 
-    /**
-     * @param \Spryker\Zed\QuoteApproval\Business\Quote\QuoteLockerInterface $quoteLocker
-     * @param \Spryker\Zed\QuoteApproval\Business\QuoteApproval\QuoteApprovalRequestValidatorInterface $quoteApprovalRequestValidator
-     * @param \Spryker\Zed\QuoteApproval\Dependency\Facade\QuoteApprovalToSharedCartFacadeInterface $sharedCartFacade
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalEntityManagerInterface $quoteApprovalEntityManager
-     * @param \Spryker\Zed\QuoteApproval\Persistence\QuoteApprovalRepositoryInterface $quoteApprovalRepository
-     */
     public function __construct(
         QuoteLockerInterface $quoteLocker,
         QuoteApprovalRequestValidatorInterface $quoteApprovalRequestValidator,
@@ -73,11 +66,6 @@ class QuoteApprovalRemover implements QuoteApprovalRemoverInterface
         $this->quoteApprovalRepository = $quoteApprovalRepository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     public function removeQuoteApproval(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($quoteApprovalRequestTransfer) {
@@ -85,11 +73,6 @@ class QuoteApprovalRemover implements QuoteApprovalRemoverInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalResponseTransfer
-     */
     protected function executeRemoveQuoteApprovalTransaction(QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer): QuoteApprovalResponseTransfer
     {
         $quoteApprovalResponseTransfer = new QuoteApprovalResponseTransfer();
@@ -108,12 +91,6 @@ class QuoteApprovalRemover implements QuoteApprovalRemoverInterface
             ->addMessage($this->createMessageTransfer(static::GLOSSARY_KEY_APPROVAL_REMOVED));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalResponseTransfer $quoteApprovalResponse
-     * @param \Generated\Shared\Transfer\QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
-     *
-     * @return void
-     */
     protected function executeQuoteApprovalRemoval(
         QuoteApprovalResponseTransfer $quoteApprovalResponse,
         QuoteApprovalRequestTransfer $quoteApprovalRequestTransfer
@@ -128,11 +105,6 @@ class QuoteApprovalRemover implements QuoteApprovalRemoverInterface
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function expandQuoteWithQuoteApprovals(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $quoteTransfer->setQuoteApprovals(
@@ -140,12 +112,6 @@ class QuoteApprovalRemover implements QuoteApprovalRemoverInterface
         );
     }
 
-    /**
-     * @param string $message
-     * @param array $parameters
-     *
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     protected function createMessageTransfer(string $message, array $parameters = []): MessageTransfer
     {
         $messageTransfer = new MessageTransfer();

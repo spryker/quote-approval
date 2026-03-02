@@ -11,32 +11,11 @@ use Generated\Shared\Transfer\QuoteApprovalTransfer;
 
 interface QuoteApprovalEntityManagerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer
-     */
     public function createQuoteApproval(QuoteApprovalTransfer $quoteApprovalTransfer): QuoteApprovalTransfer;
 
-    /**
-     * @param int $idQuoteApproval
-     * @param string $status
-     *
-     * @return void
-     */
     public function updateQuoteApprovalWithStatus(int $idQuoteApproval, string $status): void;
 
-    /**
-     * @param int $idQuoteApproval
-     *
-     * @return void
-     */
     public function deleteQuoteApprovalById(int $idQuoteApproval): void;
 
-    /**
-     * @param int $idQuote
-     *
-     * @return void
-     */
     public function removeApprovalsByIdQuote(int $idQuote): void;
 }

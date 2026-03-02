@@ -12,11 +12,5 @@ use Generated\Shared\Transfer\QuoteApprovalTransfer;
 
 interface QuoteApprovalMessageBuilderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     * @param string $status
-     *
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     public function getSuccessMessage(QuoteApprovalTransfer $quoteApprovalTransfer, string $status): MessageTransfer;
 }

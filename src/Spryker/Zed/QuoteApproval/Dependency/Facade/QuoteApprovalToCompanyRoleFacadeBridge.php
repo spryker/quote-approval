@@ -35,11 +35,6 @@ class QuoteApprovalToCompanyRoleFacadeBridge implements QuoteApprovalToCompanyRo
         return $this->companyRoleFacade->getCompanyUserIdsByPermissionKey($permissionKey, $idCompany);
     }
 
-    /**
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\PermissionCollectionTransfer
-     */
     public function findPermissionsByIdCompanyUser(int $idCompanyUser): PermissionCollectionTransfer
     {
         return $this->companyRoleFacade->findPermissionsByIdCompanyUser($idCompanyUser);

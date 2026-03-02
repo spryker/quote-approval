@@ -50,11 +50,6 @@ class QuoteApprovalDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PLUGINS_QUOTE_APPROVAL_UNLOCK_PRE_CHECK = 'PLUGINS_QUOTE_APPROVAL_UNLOCK_PRE_CHECK';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
@@ -68,11 +63,6 @@ class QuoteApprovalDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addQuoteFacade(Container $container): Container
     {
         $container->set(static::FACADE_QUOTE, function (Container $container) {
@@ -82,11 +72,6 @@ class QuoteApprovalDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyUserFacade(Container $container): Container
     {
         $container->set(static::FACADE_COMPANY_USER, function (Container $container) {
@@ -98,11 +83,6 @@ class QuoteApprovalDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCompanyRoleFacade(Container $container): Container
     {
         $container->set(static::FACADE_COMPANY_ROLE, function (Container $container) {
@@ -114,11 +94,6 @@ class QuoteApprovalDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addSharedCartFacade(Container $container): Container
     {
         $container->set(static::FACADE_SHARED_CART, function (Container $container) {
@@ -130,11 +105,6 @@ class QuoteApprovalDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCustomerFacade(Container $container): Container
     {
         $container->set(static::FACADE_CUSTOMER, function (Container $container) {
@@ -146,11 +116,6 @@ class QuoteApprovalDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addQuoteApprovalUnlockPreCheckPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_QUOTE_APPROVAL_UNLOCK_PRE_CHECK, function (Container $container) {

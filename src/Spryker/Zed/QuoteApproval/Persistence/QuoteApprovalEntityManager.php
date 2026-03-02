@@ -17,11 +17,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
  */
 class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteApprovalEntityManagerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteApprovalTransfer $quoteApprovalTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer
-     */
     public function createQuoteApproval(QuoteApprovalTransfer $quoteApprovalTransfer): QuoteApprovalTransfer
     {
         $quoteApprovalEntity = $this->getFactory()
@@ -38,12 +33,6 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
             ->mapQuoteApprovalEntityToTransfer($quoteApprovalEntity, $quoteApprovalTransfer);
     }
 
-    /**
-     * @param int $idQuoteApproval
-     * @param string $status
-     *
-     * @return void
-     */
     public function updateQuoteApprovalWithStatus(int $idQuoteApproval, string $status): void
     {
         $this->getFactory()
@@ -52,11 +41,6 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
             ->update([ucfirst(SpyQuoteApprovalEntityTransfer::STATUS) => $status]);
     }
 
-    /**
-     * @param int $idQuoteApproval
-     *
-     * @return void
-     */
     public function deleteQuoteApprovalById(int $idQuoteApproval): void
     {
         $this->getFactory()
@@ -65,11 +49,6 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
             ->delete();
     }
 
-    /**
-     * @param int $idQuote
-     *
-     * @return void
-     */
     public function removeApprovalsByIdQuote(int $idQuote): void
     {
         $this->getFactory()

@@ -13,12 +13,6 @@ use Spryker\Shared\QuoteApproval\QuoteApprovalConfig;
 
 class QuoteApprovalReader implements QuoteApprovalReaderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param int $idCompanyUser
-     *
-     * @return \Generated\Shared\Transfer\QuoteApprovalTransfer|null
-     */
     public function findWaitingQuoteApprovalByIdCompanyUser(QuoteTransfer $quoteTransfer, int $idCompanyUser): ?QuoteApprovalTransfer
     {
         foreach ($quoteTransfer->getQuoteApprovals() as $quoteApprovalTransfer) {
@@ -36,12 +30,6 @@ class QuoteApprovalReader implements QuoteApprovalReaderInterface
         return null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param int $idCompanyUser
-     *
-     * @return bool
-     */
     public function isCompanyUserInQuoteApproverList(QuoteTransfer $quoteTransfer, int $idCompanyUser): bool
     {
         foreach ($quoteTransfer->getQuoteApprovals() as $quoteApprovalTransfer) {

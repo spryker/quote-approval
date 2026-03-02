@@ -28,10 +28,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
      */
     protected $permissionContextProvider;
 
-    /**
-     * @param \Spryker\Client\QuoteApproval\Quote\QuoteStatusCalculatorInterface $quoteStatusCalculator
-     * @param \Spryker\Client\QuoteApproval\Permission\ContextProvider\PermissionContextProviderInterface $permissionContextProvider
-     */
     public function __construct(
         QuoteStatusCalculatorInterface $quoteStatusCalculator,
         PermissionContextProviderInterface $permissionContextProvider
@@ -40,11 +36,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
         $this->permissionContextProvider = $permissionContextProvider;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function isQuoteApprovalRequired(QuoteTransfer $quoteTransfer): bool
     {
         if ($this->isQuoteWaitingForApproval($quoteTransfer)) {
@@ -58,21 +49,11 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
         return !$this->isQuoteApproved($quoteTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function canQuoteBeApprovedByCurrentCustomer(QuoteTransfer $quoteTransfer): bool
     {
         return $this->can(ApproveQuotePermissionPlugin::KEY, $this->permissionContextProvider->provideContext($quoteTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function isQuoteWaitingForApproval(QuoteTransfer $quoteTransfer): bool
     {
         $quoteStatus = $this->quoteStatusCalculator
@@ -81,11 +62,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
         return $quoteStatus === QuoteApprovalConfig::STATUS_WAITING;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function isQuoteApproved(QuoteTransfer $quoteTransfer): bool
     {
         $quoteTransfer = $this->quoteStatusCalculator
@@ -94,11 +70,6 @@ class QuoteStatusChecker implements QuoteStatusCheckerInterface
         return $quoteTransfer === QuoteApprovalConfig::STATUS_APPROVED;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool
-     */
     public function isQuoteDeclined(QuoteTransfer $quoteTransfer): bool
     {
         $quoteStatus = $this->quoteStatusCalculator

@@ -79,9 +79,6 @@ class QuoteApprovalExpanderPlugin extends AbstractPlugin implements QuoteExpande
         $this->quoteApprovalsByIdQuote = null;
     }
 
-    /**
-     * @return void
-     */
     protected function preloadApprovals(): void
     {
         if ($this->quoteApprovalsByIdQuote !== []) {

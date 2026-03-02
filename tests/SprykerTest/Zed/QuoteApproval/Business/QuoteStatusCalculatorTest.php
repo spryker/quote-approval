@@ -27,9 +27,6 @@ use Spryker\Zed\QuoteApproval\Business\Quote\QuoteStatusCalculatorInterface;
  */
 class QuoteStatusCalculatorTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testCalculateQuoteStatusWithOneWaitingShouldReturnWaiting(): void
     {
         $statuses = [
@@ -42,9 +39,6 @@ class QuoteStatusCalculatorTest extends Unit
         $this->assertSame($result, QuoteApprovalConfig::STATUS_WAITING);
     }
 
-    /**
-     * @return void
-     */
     public function testCalculateQuoteStatusWithApprovedShouldReturnApproved(): void
     {
         $statuses = [
@@ -57,9 +51,6 @@ class QuoteStatusCalculatorTest extends Unit
         $this->assertSame($result, QuoteApprovalConfig::STATUS_APPROVED);
     }
 
-    /**
-     * @return void
-     */
     public function testCalculateQuoteStatusWithDeclinedShouldReturnDeclined(): void
     {
         $statuses = [
@@ -72,9 +63,6 @@ class QuoteStatusCalculatorTest extends Unit
         $this->assertSame($result, QuoteApprovalConfig::STATUS_DECLINED);
     }
 
-    /**
-     * @return void
-     */
     public function testCalculateQuoteStatusWithWaitingAndApprovedShouldReturnApproved(): void
     {
         $statuses = [
@@ -88,9 +76,6 @@ class QuoteStatusCalculatorTest extends Unit
         $this->assertSame($result, QuoteApprovalConfig::STATUS_APPROVED);
     }
 
-    /**
-     * @return void
-     */
     public function testCalculateQuoteStatusWithWaitingAndDeclinedShouldReturnWaiting(): void
     {
         $statuses = [
@@ -104,9 +89,6 @@ class QuoteStatusCalculatorTest extends Unit
         $this->assertSame($result, QuoteApprovalConfig::STATUS_WAITING);
     }
 
-    /**
-     * @return void
-     */
     public function testCalculateQuoteStatusWithWaitingDeclinedAndApprovedShouldReturnApproved(): void
     {
         $statuses = [
@@ -121,9 +103,6 @@ class QuoteStatusCalculatorTest extends Unit
         $this->assertSame($result, QuoteApprovalConfig::STATUS_APPROVED);
     }
 
-    /**
-     * @return void
-     */
     public function testCalculateQuoteStatusWithEmptyDataShouldReturnNull(): void
     {
         $quoteTransfer = $this->createQuoteTransfer();
@@ -161,9 +140,6 @@ class QuoteStatusCalculatorTest extends Unit
         return new ArrayObject($quoteApprovalTransfers);
     }
 
-    /**
-     * @return \Spryker\Zed\QuoteApproval\Business\Quote\QuoteStatusCalculatorInterface
-     */
     protected function createQuoteStatusCalculator(): QuoteStatusCalculatorInterface
     {
         return new QuoteStatusCalculator();
