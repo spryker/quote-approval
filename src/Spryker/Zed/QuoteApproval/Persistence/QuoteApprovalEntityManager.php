@@ -8,7 +8,6 @@
 namespace Spryker\Zed\QuoteApproval\Persistence;
 
 use Generated\Shared\Transfer\QuoteApprovalTransfer;
-use Generated\Shared\Transfer\SpyQuoteApprovalEntityTransfer;
 use Orm\Zed\QuoteApproval\Persistence\SpyQuoteApproval;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
@@ -35,25 +34,42 @@ class QuoteApprovalEntityManager extends AbstractEntityManager implements QuoteA
 
     public function updateQuoteApprovalWithStatus(int $idQuoteApproval, string $status): void
     {
-        $this->getFactory()
+        $quoteApprovalEntity = $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByIdQuoteApproval($idQuoteApproval)
-            ->update([ucfirst(SpyQuoteApprovalEntityTransfer::STATUS) => $status]);
+            ->findOne();
+
+        if (!$quoteApprovalEntity) {
+            return;
+        }
+
+        $quoteApprovalEntity->setStatus($status)
+            ->save();
     }
 
     public function deleteQuoteApprovalById(int $idQuoteApproval): void
     {
-        $this->getFactory()
+        $quoteApprovalEntity = $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByIdQuoteApproval($idQuoteApproval)
-            ->delete();
+            ->findOne();
+
+        if (!$quoteApprovalEntity) {
+            return;
+        }
+
+        $quoteApprovalEntity->delete();
     }
 
     public function removeApprovalsByIdQuote(int $idQuote): void
     {
-        $this->getFactory()
+        $quoteApprovalEntities = $this->getFactory()
             ->createQuoteApprovalPropelQuery()
             ->filterByFkQuote($idQuote)
-            ->delete();
+            ->find();
+
+        foreach ($quoteApprovalEntities as $quoteApprovalEntity) {
+            $quoteApprovalEntity->delete();
+        }
     }
 }
