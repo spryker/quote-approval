@@ -64,7 +64,6 @@ class QuoteApprovalExpanderPluginTest extends Unit
     ): void {
         $reflectedClass = new ReflectionClass(QuoteApprovalExpanderPlugin::class);
         $property = $reflectedClass->getProperty('quoteApprovalsByIdQuote');
-        $property->setAccessible(true);
         $property->setValue($quoteApprovalExpanderPlugin, $indexedQuoteApprovals);
     }
 
